@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import TitleInput from "./Typography/TitleInput";
 import DatePicker from './Inputs/DatePicker';
 import TextInput from './Inputs/TextInput';
+import Button from './Button'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,13 +37,14 @@ export default function CenteredGrid() {
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={6} sm={5} md={3}>
           <Paper className={classes.paper}>
             <TitleInput data="Add user" />
             <TextInput label="Name"/>
+            <Button label="ADD"/>
           </Paper>
         </Grid>
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={6} sm={5} md={3}>
           <Paper className={classes.paper}>
             <TitleInput data="Add campaign" />
             <TextInput label="Name"/>
@@ -50,21 +52,24 @@ export default function CenteredGrid() {
             <DatePicker label="Ending date" />
             <TextInput label="Name"/>
             <TextInput label="Name"/>
+            <Button label="ADD"/>
           </Paper>
         </Grid>
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={6} sm={5} md={3}>
           <Paper className={classes.paper}>
             <TitleInput data="Add prospect list" />
             <TextInput label="Name"/>
+            <Button label="ADD"/>
           </Paper>
         </Grid>
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={6} sm={5} md={3}>
           <Paper className={classes.paper}>
             <TitleInput data="Add prospect" />
             <TextInput label="Name"/>
             <TextInput label="Name"/>
             <TextInput label="Name"/>
             <TextInput label="Name"/>
+            <Button label="ADD"/>
           </Paper>
         </Grid>
       </Grid>

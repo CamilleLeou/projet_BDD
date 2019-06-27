@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker
 } from "@material-ui/pickers";
 
@@ -10,6 +8,9 @@ const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+  },
+  root: {
+    flexGrow: 1,
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -22,7 +23,7 @@ export default function DatePicker({ label }) {
   const classes = useStyles();
 
   const [selectedDate, setSelectedDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
+    new Date("2014-08-19T21:11:54")
   );
 
   function handleDateChange(date) {
@@ -31,6 +32,7 @@ export default function DatePicker({ label }) {
 
   return (
     <KeyboardDatePicker
+      className={classes.textField}
       margin="normal"
       id="mui-pickers-date"
       label={label}
