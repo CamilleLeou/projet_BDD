@@ -10,7 +10,6 @@ const useStyles = makeStyles({
 });
 
 export default function TitleInput({ data }) {
-  const classes = useStyles();
 
   return (
     <Typography variant="h5" gutterBottom>

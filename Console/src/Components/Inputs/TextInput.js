@@ -12,10 +12,7 @@ export default function TextInput({label}) {
     const classes = useStyles();
 
     const [values, setValues] = React.useState({
-        name: "Cat in the Hat",
-        age: "",
-        multiline: "Controlled",
-        currency: "EUR"
+        name: "Cat in the Hat"
     });
 
     const handleChange = name => event => {
