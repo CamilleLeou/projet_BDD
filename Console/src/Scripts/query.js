@@ -8,27 +8,69 @@ const client = new Client({
   database: "admin"
 });
 
-module.exports.queryDatabase = function(query) {
+/*
+module.exports.queryDatabasePromise = function(query) {
   return new Promise((resolve, reject) => {
     client
       .connect()
       .then(() => console.log("Connected succesfuly !"))
       .then(() => {
         console.log(query);
-        client.query(query);
+        return client.query(query);
       })
       .then(results => {
-        console.table(results.row);
+        console.log(results);
         resolve(results);
       })
+      .then(() => console.log("test"))
       .catch(error => reject(error))
       .finally(() => client.end());
   });
 };
+*/
 
-exports
-  .queryDatabase("select * from dba_prj01.Prospect")
-  .then(results => console.table(results.row));
+// Await queryDatabase
+
+module.exports.queryDatabaseAsyncAwait = async function(query) {
+  try {
+    await client.connect();
+    console.log("Connected succesfuly !");
+    console.log(query);
+    const results = await client.query(query);
+    console.log(results);
+    console.log("test");
+    return results;
+  } catch (error) {
+    throw error;
+  } finally {
+    client.end();
+  }
+};
+
+/*
+module.exports.queryDatabaseCallback = (query, callback) => {
+  client
+    .connect(err => {
+      if (err) throw err;
+      console.log("Connected succefuly");
+      return client.query(query, (err, results) => {
+        if (err) throw err;
+        console.log(results);
+        callback(results);
+        client.end((err) => {
+          if (err) throw err;
+        })
+      });
+    })
+    
+};
+*/
+
+exports.queryDatabaseAsyncAwait("select * from dba_prj01.Prospect", results => {
+  console.log(results);
+});
+
+// Mauvaise pratique, il faut toujours mettre un return, car il est implicite sur une seule ligne
 
 /*
 client
@@ -38,4 +80,4 @@ client
     .then(results => console.table(results.rows))
     .catch(error => console.log(error))
     .finally(() => client.end());
-    */
+*/
