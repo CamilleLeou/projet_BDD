@@ -9,6 +9,7 @@ import TextInput from './Inputs/TextInput';
 import Button from './Button';
 import Chooser from './Inputs/Chooser';
 import FormControl from '@material-ui/core/FormControl'
+import {ProductConsumer} from '../context'
 
 const useStyles = makeStyles(theme => ({
   root: {

@@ -8,37 +8,31 @@ const client = new Client({
   database: "admin"
 });
 
-/*
+
 module.exports.queryDatabasePromise = function(query) {
   return new Promise((resolve, reject) => {
     client
       .connect()
       .then(() => console.log("Connected succesfuly !"))
       .then(() => {
-        console.log(query);
         return client.query(query);
       })
       .then(results => {
-        console.log(results);
         resolve(results);
       })
-      .then(() => console.log("test"))
       .catch(error => reject(error))
       .finally(() => client.end());
   });
 };
-*/
+
 
 // Await queryDatabase
-
+/*
 module.exports.queryDatabaseAsyncAwait = async function(query) {
   try {
     await client.connect();
     console.log("Connected succesfuly !");
-    console.log(query);
     const results = await client.query(query);
-    console.log(results);
-    console.log("test");
     return results;
   } catch (error) {
     throw error;
@@ -46,7 +40,7 @@ module.exports.queryDatabaseAsyncAwait = async function(query) {
     client.end();
   }
 };
-
+*/
 /*
 module.exports.queryDatabaseCallback = (query, callback) => {
   client
@@ -55,7 +49,6 @@ module.exports.queryDatabaseCallback = (query, callback) => {
       console.log("Connected succefuly");
       return client.query(query, (err, results) => {
         if (err) throw err;
-        console.log(results);
         callback(results);
         client.end((err) => {
           if (err) throw err;
@@ -66,18 +59,7 @@ module.exports.queryDatabaseCallback = (query, callback) => {
 };
 */
 
-exports.queryDatabaseAsyncAwait("select * from dba_prj01.Prospect", results => {
-  console.log(results);
-});
+//exports.queryDatabasePromise("select * from dba_prj01.Prospect").then((results) => console.log(results.rows))
+
 
 // Mauvaise pratique, il faut toujours mettre un return, car il est implicite sur une seule ligne
-
-/*
-client
-    .connect()
-    .then(() => console.log("Connected succesfuly !"))
-    .then(() => client.query("select * from dba_prj01.Prospect"))
-    .then(results => console.table(results.rows))
-    .catch(error => console.log(error))
-    .finally(() => client.end());
-*/
