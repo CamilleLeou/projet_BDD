@@ -1,6 +1,6 @@
-const {Client} = require ("pg");
+const { Pool } = require("pg");
 
-const client = new Client({
+const pool = new Pool({
   user: "admin",
   password: "efrei2019",
   host: "localhost",
@@ -8,55 +8,36 @@ const client = new Client({
   database: "admin"
 });
 
+modules.exports.getUsers = (request, response) => {
+  pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+
+/*
 module.exports.queryDatabasePromise = function(query) {
   return new Promise((resolve, reject) => {
-    client
+
+    let resultsToResolve;
+    pool
       .connect()
       .then(() => console.log("Connected succesfuly !"))
       .then(() => {
-        return client.query(query);
+        return pool.query(query);
       })
       .then(results => {
-        resolve(results);
+        resultsToResolve = results;
       })
       .catch(error => reject(error))
-      .finally(() => client.end());
+      .then(() => pool.end())
+      .catch(error => reject(error))
+      .then(() => {
+        resolve(resultsToResolve);
+      });
   });
 };
-
-// Await queryDatabase
-/*
-module.exports.queryDatabaseAsyncAwait = async function(query) {
-  try {
-    await client.connect();
-    console.log("Connected succesfuly !");
-    const results = await client.query(query);
-    return results;
-  } catch (error) {
-    throw error;
-  } finally {
-    client.end();
-  }
-};
 */
-/*
-module.exports.queryDatabaseCallback = (query, callback) => {
-  client
-    .connect(err => {
-      if (err) throw err;
-      console.log("Connected succefuly");
-      return client.query(query, (err, results) => {
-        if (err) throw err;
-        callback(results);
-        client.end((err) => {
-          if (err) throw err;
-        })
-      });
-    })
-    
-};
-*/
-
-//exports.queryDatabasePromise("select * from dba_prj01.Prospect").then((results) => console.log(results.rows))
-
-// Mauvaise pratique, il faut toujours mettre un return, car il est implicite sur une seule ligne

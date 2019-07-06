@@ -9,7 +9,9 @@ import TextInput from "./Inputs/TextInput";
 import Button from "./Button";
 import Chooser from "./Inputs/Chooser";
 import FormControl from "@material-ui/core/FormControl";
+import AddCampaign from "./Forms/addCampaign";
 import { ProductConsumer } from "../context";
+import AddUser from "./Forms/AddUser";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,22 +38,13 @@ export default function CenteredGrid() {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={6} sm={5} md={3}>
-          <Paper className={classes.paper} />
+          <Paper className={classes.paper}>
+            <AddUser/>
+          </Paper>
         </Grid>
         <Grid item xs={6} sm={5} md={3}>
           <Paper className={classes.paper}>
-            <TitleInput data="Add campaign" />
-            <form className={classes.root} autoComplete="off">
-              <FormControl className={classes.formControl}>
-                <Chooser />
-                <TextInput label="Name" />
-                <DatePicker label="Beggining date" />
-                <DatePicker label="Ending date" />
-                <TextInput label="Name" />
-                <TextInput label="Name" />
-                <Button label="ADD" />
-              </FormControl>
-            </form>
+            <AddCampaign/>
           </Paper>
         </Grid>
         <Grid item xs={6} sm={5} md={3}>

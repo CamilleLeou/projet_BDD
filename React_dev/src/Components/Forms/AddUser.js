@@ -1,60 +1,64 @@
 import React, { Component, Fragment } from "react";
-import { Formik } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
+import { styled } from "@material-ui/styles";
 import TitleInput from "../Typography/TitleInput";
-import TextInput from "../Inputs/TextInput";
-import Button from "../Button";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import Paper from "@material-ui/core/Paper";
 import { ProductConsumer } from "../../context";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-    maxWidth: 190
-  },
-  paper: {
-    margin: 20,
-    padding: theme.spacing(2),
-    color: theme.palette.text.secondary
-  }
-}));
+const MyButton = styled(Button)({
+  background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+  border: 0,
+  borderRadius: 3,
+  boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+  color: "white",
+  height: 32,
+  padding: "0 30px",
+  marginTop: "20px"
+});
 
-export default function AddUser() {
-  const classes = useStyles();
-  
-  const setUsers = () => {
-    // Ici un call api react qui va bien
-    // localhost:3000/api/query
-    let query = "select * from dba_prj01.Prospect";
-    let url = "http://localhost:3000/api/query?query=" + encodeURIComponent(query);
-    console.log(url);
-    fetch(url).then(response => response.json()).then(data => {
-      console.log(data);
-      /*
-      this.setState((data) => {
-        return { users: data };
-      });
-      */
+export default class AddUser extends Component {
+  state = {
+    name: ""
+  };
+
+  handleNameChange = e => {
+    this.setState({
+      name: e.target.value
     });
   };
 
-  setUsers();
+  addUserBDD = () => {
+    fetch("http://localhost:3050/users/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    });
+  };
 
-  return (
-    <Paper className={classes.paper}>
-      <TitleInput data="Add user" />
-      <form className={classes.root} autoComplete="off">
-        <FormControl className={classes.formControl}>
-          <TextInput label="Name" />
-          <Button label="ADD" />
+  render() {
+    const { name } = this.state;
+
+    return (
+      <React.Fragment>
+        <TitleInput data="Add user" />
+        <FormControl>
+          <TextField
+            label="Name"
+            value={name}
+            onChange={this.handleNameChange}
+            placeholder="Enter name"
+          />
+          <MyButton onClick={this.addUserBDD}>
+            ADD
+          </MyButton>
         </FormControl>
-      </form>
-    </Paper>
-  );
+      </React.Fragment>
+    );
+  }
 }

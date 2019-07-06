@@ -9,13 +9,12 @@ import AddUser from "./Components/Forms/AddUser";
 
 function App() {
   return (
-      <React.Fragment>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Appbar />
-          <MainGrid />
-        </MuiPickersUtilsProvider>
-      </React.Fragment>
- 
+    <React.Fragment>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Appbar />
+        <MainGrid />
+      </MuiPickersUtilsProvider>
+    </React.Fragment>
   );
 }
 

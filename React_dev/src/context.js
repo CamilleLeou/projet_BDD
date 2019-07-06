@@ -11,20 +11,56 @@ class ProductProvider extends Component {
 
   componentDidMount() {
     this.setUsers();
+    this.setCampaigns();
+    this.setProspects();
+    this.setProspectsLists();
+  }
+
+  refreshData()
+  {
+    this.setUsers();
+    this.setCampaigns();
+    this.setProspects();
+    this.setProspectsLists();
   }
 
   setUsers = () => {
-    // Ici un call api react qui va bien
-    // localhost:3000/api/query
-    let query = "select * from dba_prj01.Prospect";
-    let url = "localhost:3000/api/query?query=" + encodeURIComponent(query);
-    console.log(url);
-    fetch(url).then(data => {
+    let url = "http://localhost:3050/users";
+    fetch(url).then(response => response.json()).then(data => {
       console.log(data);
-      /*this.setState((data) => {
-        return { users: data };
-      });
-      */
+    });
+    this.setState(data => {
+      return { users: data };
+    });
+  };
+
+  setCampaigns = () => {
+    let url = "http://localhost:3050/campaigns";
+    fetch(url).then(response => response.json()).then(data => {
+      console.log(data);
+    });
+    this.setState(data => {
+      return { campaigns: data };
+    });
+  };
+
+  setProspectsLists = () => {
+    let url = "http://localhost:3050/prospectslists";
+    fetch(url).then(response => response.json()).then(data => {
+      console.log(data);
+    });
+    this.setState(data => {
+      return { prospect_list: data };
+    });
+  };
+
+  setProspects = () => {
+    let url = "http://localhost:3050/prospects";
+    fetch(url).then(response => response.json()).then(data => {
+      console.log(data);
+    });
+    this.setState(data => {
+      return { prospects: data };
     });
   };
 
