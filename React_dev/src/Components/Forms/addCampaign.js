@@ -1,15 +1,12 @@
-import React, { Component, Fragment } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { Component } from "react";
 import { styled } from "@material-ui/styles";
 import TitleInput from "../Typography/TitleInput";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel"
+import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Paper from "@material-ui/core/Paper";
+import MenuItem from "@material-ui/core/MenuItem";
 import { ProductConsumer } from "../../context";
 
 const MyButton = styled(Button)({
@@ -28,12 +25,13 @@ const MyInpuxText = styled(TextField)({
 });
 
 const MySelect = styled(Select)({
-    marginTop: "10px"
-  });
+  marginTop: "10px"
+});
 
 export default class AddUser extends Component {
   state = {
     userID: 1,
+    userName: "name",
     name: "",
     beggining_date: "",
     ending_date: "",
@@ -45,6 +43,14 @@ export default class AddUser extends Component {
     this.setState({
       name: e.target.value
     });
+  };
+
+  handleUserNameChange = e => {
+    console.log("e value: "+ e.target.value)
+    this.setState({
+      userID: e.target.value
+    });
+    console.log("state value: " + this.state.userID)
   };
 
   handleDateBegginingChange = e => {
@@ -71,21 +77,27 @@ export default class AddUser extends Component {
   };
 
   render() {
-    const {
-      userID,
-      name,
-      beggining_date,
-      ending_date,
-      started_campaign,
-      responses
-    } = this.state;
-
     return (
       <React.Fragment>
         <TitleInput data="Add campaign" />
         <FormControl>
           <InputLabel>Assign user</InputLabel>
-          <MySelect />
+          <MySelect
+            onChange={this.handleUserNameChange}
+            value={this.userID}
+          >
+            <ProductConsumer>
+              {context => {
+                return context.state.users.map(user => {
+                  return (
+                    <MenuItem value={user.id_utilisateurs} key={user.id_utilisateurs}>
+                      {user.nom}
+                    </MenuItem>
+                  );
+                });
+              }}
+            </ProductConsumer>
+          </MySelect>
           <MyInpuxText
             label="Beggining date"
             type="date"
@@ -99,19 +111,19 @@ export default class AddUser extends Component {
             label="Ending date"
             type="date"
             defaultValue="2017-06-24"
-            onChange={this.handleDateBegginingChange}
+            onChange={this.handleDateEndingChange}
             InputLabelProps={{
               shrink: true
             }}
           />
           <TextField
             label="Campaign name"
-            value={name}
+            value={this.state.name}
             onChange={this.handleNameChange}
             placeholder="Enter name"
           />
 
-          <MyButton onClick={this.addUserBDD}>ADD</MyButton>
+          <MyButton onClick={() => console.log(this.state)}>ADD</MyButton>
         </FormControl>
       </React.Fragment>
     );

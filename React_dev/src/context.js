@@ -16,51 +16,43 @@ class ProductProvider extends Component {
     this.setProspectsLists();
   }
 
-  refreshData()
-  {
-    this.setUsers();
-    this.setCampaigns();
-    this.setProspects();
-    this.setProspectsLists();
+  showUsers() {
+    console.log(this.state.users);
   }
 
   setUsers = () => {
     let url = "http://localhost:3050/users";
     fetch(url).then(response => response.json()).then(data => {
-      console.log(data);
-    });
-    this.setState(data => {
-      return { users: data };
+      this.setState(() => {
+        return { users: data };
+      });
     });
   };
 
   setCampaigns = () => {
     let url = "http://localhost:3050/campaigns";
     fetch(url).then(response => response.json()).then(data => {
-      console.log(data);
-    });
-    this.setState(data => {
-      return { campaigns: data };
+      this.setState(() => {
+        return { campaigns: data };
+      });
     });
   };
 
   setProspectsLists = () => {
     let url = "http://localhost:3050/prospectslists";
     fetch(url).then(response => response.json()).then(data => {
-      console.log(data);
-    });
-    this.setState(data => {
-      return { prospect_list: data };
+      this.setState(() => {
+        return { prospect_list: data };
+      });
     });
   };
 
   setProspects = () => {
     let url = "http://localhost:3050/prospects";
     fetch(url).then(response => response.json()).then(data => {
-      console.log(data);
-    });
-    this.setState(data => {
-      return { prospects: data };
+      this.setState(() => {
+        return { prospects: data };
+      });
     });
   };
 
@@ -68,7 +60,10 @@ class ProductProvider extends Component {
     return (
       <ProductContext.Provider
         value={{
-          ...this.state
+          // A.K.A ...state
+          state: this.state,
+          setUsers: this.setUsers,
+          showUsers: this.showUsers
         }}
       >
         {this.props.children};

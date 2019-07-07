@@ -9,7 +9,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function DatePicker({ label }) {
-  const classes = useStyles();
 
   const [selectedDate, setSelectedDate] = React.useState(
     new Date("2014-08-19T21:11:54")

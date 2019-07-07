@@ -1,12 +1,9 @@
-import React, { Component, Fragment } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { Component } from "react";
 import { styled } from "@material-ui/styles";
 import TitleInput from "../Typography/TitleInput";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
-import Paper from "@material-ui/core/Paper";
-import { ProductConsumer } from "../../context";
 
 const MyButton = styled(Button)({
   background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
