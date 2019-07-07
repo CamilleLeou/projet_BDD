@@ -8,4 +8,8 @@
 
 ## To start the front-end app
 
-- `cd ./Console && npm install && npm start`
+- `cd ./React_Dev && npm install && npm start`
+
+## To start the back-end app
+
+- `cd ./Web_server_bdd && node index`
