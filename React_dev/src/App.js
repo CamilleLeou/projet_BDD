@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Appbar from "./Components/Appbar";
 import MainGrid from "./Components/MainGrid";
+import TestComponent from "./Components/TestComponent";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 import DateFnsUtils from "@date-io/date-fns";

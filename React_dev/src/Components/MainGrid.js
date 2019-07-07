@@ -1,16 +1,13 @@
 import React from "react";
-import { Formik } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import TitleInput from "./Typography/TitleInput";
-import DatePicker from "./Inputs/DatePicker";
 import TextInput from "./Inputs/TextInput";
 import Button from "./Button";
 import Chooser from "./Inputs/Chooser";
 import FormControl from "@material-ui/core/FormControl";
 import AddCampaign from "./Forms/addCampaign";
-import { ProductConsumer } from "../context";
 import AddUser from "./Forms/AddUser";
 
 const useStyles = makeStyles(theme => ({
